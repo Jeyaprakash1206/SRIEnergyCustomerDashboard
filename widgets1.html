@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Customer Dashboard</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="./plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="./dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <style>
+    .icons {
+      color: #708090;
+    }
+
+    .fa {
+      font-size: 50px;
+    }
+
+    .fa-apple,
+    .fa-car {
+      font-size: 80px;
+    }
+  </style>
+  <style>
+    .nopad {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    /*image gallery*/
+    .image-checkbox {
+      cursor: pointer;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      border: 4px solid transparent;
+      margin-bottom: 0;
+      outline: 0;
+    }
+
+    .image-checkbox input[type="checkbox"] {
+      display: none;
+    }
+
+    .image-checkbox-checked {
+      border-color: #4783B0;
+    }
+
+    .image-checkbox .faa {
+      position: absolute;
+      color: #4A79A3;
+      background-color: #fff;
+      padding: 10px;
+      top: 0;
+      right: 0;
+    }
+
+    .image-checkbox-checked .faa {
+      display: block !important;
+    }
+  </style>
+</head>
+
+<body class="hold-transition sidebar-mini">
+  <div class="wrapper">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+      <!-- Left navbar links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="#" class="nav-link">Home</a>
+        </li>
+      </ul>
+
+
+      <!-- Right navbar links -->
+      <ul class="navbar-nav ml-auto">
+        <!-- Messages Dropdown Menu -->
+        <ul class="navbar-nav">
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="./index.html" onclick="signout()" class="nav-link">Sign Out</a>
+          </li>
+        </ul>
+        <li class="nav-item">
+          <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
+            <i class="fas fa-th-large"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a href="#" class="brand-link">
+        <span class="brand-text font-weight-light">Customer Dashboard</span>
+      </a>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img src="./dist/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
+          </div>
+          <div class="info">
+            <a href="#" class="d-block" id="companyname"></a>
+          </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+              <a href="./widgets1.html" class="nav-link active">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Buckets
+                </p>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>Buckets</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#" id="breadcrum">Home</a></li>
+                <!-- <li class="breadcrumb-item active">Widgets</li> -->
+              </ol>
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="progress-bar progress-bar-striped progress-bar-animated progressbar"
+            style="width:40%; color:black"></div>
+          <div class="progress-bar progress-bar-striped progress-bar-animated subprogressbar"
+            style="width:40%; color:black"></div>
+        </div>
+      </section>
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <!-- <form action="#" id="documentform" novalidate method="post" accept-charset="utf-8"> -->
+              <div class="container">
+                <button type="button" class="btn btn-primary selectall">Select All</button>
+                <button type="button" class="btn btn-primary unselectall">Un Select All</button>
+                <button type="button" id="download_btn" class="btn btn-success approveall">Download</button>
+                <button type="button" id="back_btn" class="btn btn-primary back">Back</button>
+              </div>
+              <input type="hidden" id="selected" name="selected" value="" />
+
+              <!-- </form> -->
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row" id="files">
+
+            <!-- /.col -->
+          </div>
+
+          <!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+
+      <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
+        <i class="fas fa-chevron-up"></i>
+      </a>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer class="main-footer">
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>
+  <!-- ./wrapper -->
+
+  <!-- jQuery -->
+  <script src="./plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="./dist/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="./dist/js/demo.js"></script>
+  <script type="text/javascript">
+    function setCookie(name, value, d) {
+      var expires = "";
+      var days = (d) ? d : 1;
+      var date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
+      document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+    function getCookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+    function eraseCookie(name) {
+      document.cookie = name + '=; Max-Age=-99999999;';
+    }
+    // image gallery
+    // init the state from the input
+    $(".image-checkbox").each(function () {
+      if ($(this).find('input[type="checkbox"]').first().attr("checked")) {
+        $(this).addClass('image-checkbox-checked');
+      }
+      else {
+        $(this).removeClass('image-checkbox-checked');
+      }
+    });
+
+    // sync the state to the input
+    $(".image-checkbox").on("click", function (e) {
+      $(this).toggleClass('image-checkbox-checked');
+      var $checkbox = $(this).find('input[type="checkbox"]');
+      $checkbox.prop("checked", !$checkbox.prop("checked"))
+
+      e.preventDefault();
+    });
+    $(".selectall").on("click", function (e) {
+      //$(".checkBoxClass").prop('checked', true);
+      jQuery.each($('.image-checkbox'), function (i, val) {
+        console.log(i, val);
+        // if (val.find('input[type="checkbox"]').first().attr("checked")) {
+        $(this).addClass('image-checkbox-checked');
+        // }
+        // else {
+        //   $(this).removeClass('image-checkbox-checked');
+        // }
+      });
+    });
+    $(".back").on("click", function (e) {
+      console.log('back');
+      var path = getCookie("path");
+      var folder = getCookie("folder");
+      path = path.split('/')
+      if (path.length >= 2 && getCookie("path") != "/" && getCookie("path") != (folder + "/")) {
+        path.splice((path.length - 2), 2);
+        path = path.join("/") + "/";
+        setCookie('navigation', path);
+        setCookie('path', path);
+        window.location.href = './widgets1.html';
+      }
+
+    });
+    $(".approveall").on("click", function (e) {
+      console.log('approveall');
+      var a = ($('.image-checkbox-checked').children('img'));
+      console.log(a);
+      var sel = [];
+      var x = document.getElementsByClassName("image-checkbox-checked");
+      var i;
+      for (i = 0; i < x.length; i++) {
+        sel.push($(x[i]).find("img").attr("src"));
+      };
+
+      //  var menus = document.querySelectorAll(a);
+      // menus = [].slice.call(menus);
+      // menus.forEach(function(child) { 
+      //   sel.push(child.src);
+      // });
+      //  Array.prototype.forEach.call(a, child => {
+      //    sel.push(child.src);
+      // });
+      console.log('sel', sel);
+      $('#selected').val(sel);
+      $("#documentform").submit();
+    });
+    $(".unselectall").on("click", function (e) {
+      //$(".checkBoxClass").prop('checked', true);
+      jQuery.each($('.image-checkbox'), function (i, val) {
+        console.log(i, val);
+        // if (val.find('input[type="checkbox"]').first().attr("checked")) {
+        $(this).removeClass('image-checkbox-checked');
+        // }
+        // else {
+        //   $(this).removeClass('image-checkbox-checked');
+        // }
+      });
+    });
+    function imgmouseover(path) {
+      console.log('hello', path);
+    }
+    $("#target").dblclick(function () {
+      window.location.href = "http://stackoverflow.com";
+    });
+
+  </script>
+  <script>
+    $(function () {
+      save = function (elm) {
+        // Now the object is $(elm)
+        if (elm.innerText) {
+          var path = $(elm).find("input[type=hidden]")[0].value;
+          if (path.lastIndexOf("/") == (path.length - 1)) {
+            setCookie('path', path);
+            console.log('clicked', elm.innerText);
+            setCookie('navigation', elm.innerText);
+            window.location.href = './widgets1.html';
+          }
+          else {
+            return false;
+          }
+        }
+      };
+    });
+    function loadData() {
+      getCookie("company");
+      var prefix = getCookie("folder") + "/";
+      var path = getCookie("path");
+      if (path) {
+        prefix = path.indexOf('/') == -1 ? path + '/' : path;
+      }
+      var postdata = {
+        "accesskey": getCookie("accesskey"),
+        "secretaccesskey": getCookie("secretaccesskey"),
+        "region": getCookie("region"),
+        "bucket": getCookie("bucket"),
+        "prefix": prefix
+      }
+      $.ajax({
+        url: 'http://phpstack-203148-1112599.cloudwaysapps.com/api/directories',
+        type: 'post',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(postdata),
+        success: function (data, textStatus, jQxhr) {
+          console.log(data, textStatus, jQxhr)
+          //window.location.href = './widgets1.html';
+          data.response.forEach(element => {
+            console.log(element.Key);
+            var faclass = "fa-folder";
+            if ((element.Key.toLowerCase().indexOf(".pdf")) > -1) {
+              faclass = "fa-file-pdf";
+            }
+            $(`<div ondblclick="save(this)" class="col-md-2 col-sm-6 col-12">
+              <label class="image-checkbox">
+                <i  class="icons fa `+ faclass + `"></i>
+                <div>`+ element.displayname + `</div>
+                <input type="hidden" value="`+ element.Key + `">
+                <input class="checkBoxClass" type="checkbox" name="image[]" value="" />
+                <!-- <i class="faa fa-check hidden"></i> -->
+              </label>
+              <!-- /.info-box -->
+            </div>`
+            ).appendTo('#files');
+          });
+          $(".image-checkbox").each(function () {
+            if ($(this).find('input[type="checkbox"]').first().attr("checked")) {
+              $(this).addClass('image-checkbox-checked');
+            }
+            else {
+              $(this).removeClass('image-checkbox-checked');
+            }
+          });
+
+          // sync the state to the input
+          $(".image-checkbox").on("click", function (e) {
+            $(this).toggleClass('image-checkbox-checked');
+            var $checkbox = $(this).find('input[type="checkbox"]');
+            $checkbox.prop("checked", !$checkbox.prop("checked"))
+
+            e.preventDefault();
+          });
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+          console.log(errorThrown);
+        }
+      });
+    }
+    function signout() {
+      setCookie('company', "", -1);
+      setCookie('accesskey', "", -1);
+      setCookie('secretaccesskey', "", -1);
+      setCookie('accountid', "", -1);
+      setCookie('region', "", -1);
+      setCookie('bucket', "", -1);
+      setCookie('folder', "", -1);
+      setCookie('path', "", -1);
+      setCookie('navigation', "", -1);
+            window.location.href = './index.html';
+    }
+    function download(x, i) {
+      if (x.length > i) {
+        var width = (i == 0) ? 0 : (((i + 1) / x.length) * 100);
+        var src = $(x[i]).find("input[type=hidden]")[0].value;
+        var filename = x[i].innerText;
+        var wid = (width != 0) ? width : 10;
+        $('.progressbar').css({ "width": wid + "%" });
+        $('.progressbar').text("Main Folder : downloading :" + filename + ", " + width + "%");
+        var req = new XMLHttpRequest();
+        var postdata = {
+          "accesskey": getCookie("accesskey"),
+          "secretaccesskey": getCookie("secretaccesskey"),
+          "region": getCookie("region"),
+          "bucket": getCookie("bucket"),
+          "prefix": src
+        }
+        // req.open("GET", "http://phpstack-203148-1112599.cloudwaysapps.com/api/files/S19-040-002.pdf", true);
+        if (src[src.length - 1] != "/") {
+          req.open("POST", "http://phpstack-203148-1112599.cloudwaysapps.com/api/download/" + filename, true);
+          req.setRequestHeader("Content-type", "application/json");
+          req.send(JSON.stringify(postdata));
+          req.responseType = "blob";
+
+          req.onload = function (event) {
+            console.log("event", event);
+            if (req.response) {
+              var blob = req.response;
+              console.log(blob.size);
+              var link = document.createElement('a');
+              link.href = window.URL.createObjectURL(blob);
+              var fname = req.responseURL.split('/');
+              filename = decodeURIComponent(fname[fname.length - 1]);
+              link.download = filename;
+              link.click();
+              i = i + 1;
+              download(x, i);
+            }
+          };
+        }
+        else {
+          console.log('folder');
+          $.ajax({
+            url: 'http://phpstack-203148-1112599.cloudwaysapps.com/api/allfiles',
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(postdata),
+            success: function (data, textStatus, jQxhr) {
+              console.log(data, textStatus, jQxhr)
+              //window.location.href = './widgets1.html';
+              var filearr = [];
+              data.response.forEach(element => {
+                console.log(element.Key);
+                var faclass = "fa-folder";
+                if ((element.Key[element.Key.length - 1] != "/")) {
+                  filearr.push(element.Key);
+                }
+              });
+              i = i + 1;
+              subdownload(filearr, 0, x, i);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+              console.log(errorThrown);
+            }
+          });
+        }
+      } else {
+        $('.progressbar').css({ "width": "100%" });
+        $('.progressbar').text("Main Folder Completed 100%");
+      }
+    }
+    function subdownload(x, i, mainarr, mainidx) {
+      if (x.length > i) {
+        var src = x[i];
+        var farr = x[i].split("/");
+        var filename = farr[farr.length - 1];
+        var width = (i == 0) ? 0 : (((i + 1) / x.length) * 100);
+        var wid = (width != 0) ? width : 10;
+          $('.subprogressbar').css({ "width": wid + "%" });
+          $('.subprogressbar').text("Sub Folder : downloading :" + filename + ", " + width + "%");
+        var req = new XMLHttpRequest();
+        // req.open("GET", "http://phpstack-203148-1112599.cloudwaysapps.com/api/files/S19-040-002.pdf", true);
+        var postdata = {
+          "accesskey": getCookie("accesskey"),
+          "secretaccesskey": getCookie("secretaccesskey"),
+          "region": getCookie("region"),
+          "bucket": getCookie("bucket"),
+          "prefix": src
+        }
+        req.open("POST", "http://phpstack-203148-1112599.cloudwaysapps.com/api/download/" + filename, true);
+        req.setRequestHeader("Content-type", "application/json");
+        req.send(JSON.stringify(postdata));
+        req.responseType = "blob";
+
+        req.onload = function (event) {
+          console.log("event", event);
+          if (req.response) {
+            var blob = req.response;
+            console.log(blob.size);
+            var link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            var fname = req.responseURL.split('/');
+            filename = decodeURIComponent(fname[fname.length - 1]);
+            link.download = filename;
+            link.click();
+            i = i + 1;
+            subdownload(x, i,mainarr, mainidx);
+          }
+        };
+      }
+      else {
+        $('.subprogressbar').css({ "width": "100%" });
+        $('.subprogressbar').text("Sub Folder Completed 100%");
+        download(mainarr, mainidx);
+      }
+    }
+    function pdfDownload() {
+      var a = ($('.image-checkbox-checked').children('img'));
+      console.log(a);
+      var sel = [];
+      var x = document.getElementsByClassName("image-checkbox-checked");
+      var i;
+      download(x, 0);
+      console.log('sel', sel);
+      // var postdata = {
+      //   "username": "admin",
+      //   "password": "admin"
+      // }
+      // $.ajax({
+      //   url: 'http://phpstack-203148-1112599.cloudwaysapps.com/api/files/S19-040-002.pdf',
+      //   type: 'get',
+      //   contentType: 'application/pdf',
+      //   success: function (data, textStatus, jQxhr) {
+      //     console.log('Succes')
+      //     return false;
+      //   },
+      //   error: function (jqXhr, textStatus, errorThrown) {
+      //     console.log(errorThrown);
+      //     return false;
+      //   }
+      // });
+      // return false;
+    }
+    $(document).ready(function () {
+
+      console.log('document ready...');
+      var companyname = getCookie("company");
+      $("#companyname").text(companyname);
+      var path = getCookie("path");
+      $("#breadcrum").text(path);
+
+      loadData();
+    });
+    $('#download_btn').click(function (e) {
+      pdfDownload()
+      e.preventDefault();
+      // Code goes here
+    });
+  </script>
+</body>
+
+</html>
